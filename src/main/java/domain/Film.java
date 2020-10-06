@@ -28,4 +28,14 @@ public class Film {
     public void setDirector(String director) {
         this.director = director;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Film{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", director='").append(director).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
