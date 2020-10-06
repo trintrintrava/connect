@@ -24,7 +24,6 @@ public class App {
         }
 //        вывод столбиком построчно
 
-
         System.out.println("Another way to print List of data");
         System.out.println(Arrays.toString(allActors.toArray()));
 //        вывод через одну строчку всего списка
