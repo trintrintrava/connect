@@ -1,5 +1,7 @@
 package logic.service;
 
+import config.DbConfig;
+
 import java.sql.*;
 
 public class DataBaseService {
@@ -10,12 +12,9 @@ public class DataBaseService {
         Statement statement = null;
 
         try{
-            Class.forName("org.postgresql.Driver");
+            Class.forName(DbConfig.driver);
 
-            String url = "jdbc:postgresql://localhost:5432/postgres";
-            String user = "postgres";
-            String password = "1234";
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(DbConfig.url, DbConfig.user, DbConfig.password);
 
             statement = connection.createStatement();
 
