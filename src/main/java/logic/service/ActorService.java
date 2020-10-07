@@ -2,33 +2,21 @@ package logic.service;
 
 import domain.Actor;
 
+import javax.sql.RowSet;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActorService {
+public class ActorService extends DataBaseService{
 
     public List<Actor> getAllActors() {
 
         List<Actor> actors = new ArrayList<Actor>();
 
-        Connection connection = null;
-        Statement statement = null;
-        String sql = "";
-
-        try{
-            Class.forName("org.postgresql.Driver");
-
-            String url = "jdbc:postgresql://localhost:5432/postgres";
-            String user = "postgres";
-            String password = "1234";
-            connection = DriverManager.getConnection(url, user, password);
-
-            statement = connection.createStatement();
-
-            ResultSet result = statement.executeQuery("select * from El_J.actor");
-
-            while(result.next()) {
+        String sql = "select * from El_J.actor";
+        ResultSet result = executeSql(sql);
+        try {
+            while (result.next()) {
                 long id = result.getLong("id");
                 String name = result.getString("name");
                 String secondName = result.getString("second_name");
@@ -40,13 +28,6 @@ public class ActorService {
 
                 actors.add(actor);
             }
-
-            statement.close();
-            connection.close();
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Error in sql: " + sql);
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
