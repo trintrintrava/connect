@@ -1,6 +1,6 @@
 package domain;
 
-public class Actor {
+public class Actor extends ActorFilmParent {
     private Long id;
     private String name;
     private String secondName;
