@@ -2,8 +2,11 @@ package logic;
 
 import domain.Actor;
 import domain.Film;
+import domain.dto.ActorFullInfoDto;
 import logic.service.ActorService;
+import logic.service.ComplexService;
 import logic.service.FilmService;
+import logic.service.GenericPrintService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +20,13 @@ public class App {
 
         List<Actor> allActors = actorService.getAllActors();
         List<Film> allFilms = filmService.getAllFilms();
+
+        GenericPrintService<Actor> actorGenericPrintService = new GenericPrintService<Actor>();
+        actorGenericPrintService.simplePrint(allActors);
+
+        GenericPrintService<Film> filmGenericPrintService = new GenericPrintService<Film>();
+        filmGenericPrintService.simplePrint(allFilms);
+
 
         System.out.println("Print List of results");
         for (Actor actor : allActors) {
@@ -35,5 +45,11 @@ public class App {
 
         System.out.println("Another way to print List of data");
         System.out.println(Arrays.toString(allFilms.toArray()));
+
+        ComplexService complexService = new ComplexService();
+        List<ActorFullInfoDto> infoDtoList = complexService.getAllInfoForActor("Вайона");
+        for (ActorFullInfoDto item: infoDtoList ) {
+            System.out.println(item);
+        }
     }
 }
